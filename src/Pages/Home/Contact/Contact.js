@@ -6,7 +6,7 @@ const Contact = () => {
         <div style={{background:`url(${appointment})`}} className="card my-16 bg-base-100 shadow-xl">
             <div className="card-body items-center">
                 <h2 className="card-title text-primary">Contact Us</h2>
-                <p className='text-3xl'>Stay Connected With Us</p>
+                <p className='text-3xl text-white'>Stay Connected With Us</p>
                 <div className='grid'>
                     <input type="text" placeholder="Email Address" className="input lg:w-96 mt-4" />
                     <input type="text" placeholder="Subject" className="input lg:w-96 mt-4" />

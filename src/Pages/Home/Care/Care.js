@@ -2,7 +2,7 @@ import React from 'react';
 import treatment from '../../../assets/images/treatment.png'
 const Care = () => {
     return (
-        <div className="hero min-h-screen bg-light  text-accent">
+        <div className="hero min-h-screen bg-light ">
             <div className="hero-content flex-col lg:flex-row">
                 <img src={treatment} className="hidden md:block max-w-sm rounded-lg lg:w-1/2" alt='' />
                 <div>
