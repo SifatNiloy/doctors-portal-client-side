@@ -28,6 +28,13 @@
   color: #61dafb;
 }
 
+/* input disable  */
+input:disabled {
+    color: rgb(241, 241, 241);
+    
+}
+
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
