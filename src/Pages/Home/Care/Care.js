@@ -2,9 +2,9 @@ import React from 'react';
 import treatment from '../../../assets/images/treatment.png'
 const Care = () => {
     return (
-        <div className="hero min-h-screen bg-light px-20 text-accent">
+        <div className="hero min-h-screen bg-light  text-accent">
             <div className="hero-content flex-col lg:flex-row">
-                <img src={treatment} className="max-w-sm rounded-lg shadow-2xl" alt='' />
+                <img src={treatment} className="hidden md:block max-w-sm rounded-lg lg:w-1/2" alt='' />
                 <div>
                     <h1 className="text-5xl font-bold">Exceptional Dental Care, On Your Terms</h1>
                     <p className="py-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
