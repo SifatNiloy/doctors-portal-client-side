@@ -33,7 +33,9 @@ input:disabled {
     color: rgb(241, 241, 241);
     
 }
-
+.label-text, .divider{
+  color: #3A4256;
+}
 
 @keyframes App-logo-spin {
   from {
