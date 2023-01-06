@@ -15,10 +15,12 @@ const Login = () => {
                     
                     <div className="form-control w-full max-w-xs">
                         <label className="label"> <span className="label-text">Email </span> </label>
-                        <input type="text" 
-                            {...register("email", { required: "Email Address is required" })} 
+                        <input type="email" 
+                            {...register("email", { 
+                                required: "email is required" 
+                            })} 
                         className="input input-bordered input-success w-full max-w-xs" />  
-                        {errors.email && <p className='text-red-400'>{errors.email?.message}</p>}                        
+                        {errors.email && <span className='text-red-400'>{errors.email?.message}</span>}                        
                     </div>
                     <div className="form-control w-full max-w-xs">
                         <label className="label"> <span className="label-text">Password </span> </label>
@@ -28,7 +30,7 @@ const Login = () => {
                               minLength: { value: 6, message: "password should be at least 6 characters or longer"}
                             })} 
                         className="input input-bordered input-success w-full max-w-xs" />  
-                        {errors.password && <small className='text-red-400'>{errors.password?.message}</small>}       
+                        {errors.password && <span className='text-red-400'>{errors.password?.message}</span>}       
                         <label className="label"> <span className="label-text"> Forgot Password ? </span> </label>   
                                      
                     </div>
