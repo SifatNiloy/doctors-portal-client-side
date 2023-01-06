@@ -27,7 +27,8 @@ const Login = () => {
                         <input type="password" 
                             {...register("password", { 
                                 required: "password is required",
-                              minLength: { value: 6, message: "password should be at least 6 characters or longer"}
+                              minLength: { value: 6, message: "password should be at least 6 characters or longer"},
+                                pattern: { value: /^(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])/, message: "password must be strong"}
                             })} 
                         className="input input-bordered input-success w-full max-w-xs" />  
                         {errors.password && <span className='text-red-400'>{errors.password?.message}</span>}       
