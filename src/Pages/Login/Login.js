@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useForm } from "react-hook-form";
 import { Link } from 'react-router-dom';
 const Login = () => {
-    const { register, handleSubmit } = useForm();
+    const { register, formState: { errors }, handleSubmit } = useForm();
    
     const handleLogin = (data) => {
         console.log(data)
@@ -15,11 +15,20 @@ const Login = () => {
                     
                     <div className="form-control w-full max-w-xs">
                         <label className="label"> <span className="label-text">Email </span> </label>
-                        <input type="text" {...register("name")} className="input input-bordered input-success w-full max-w-xs" />                        
+                        <input type="text" 
+                            {...register("email", { required: "Email Address is required" })} 
+                        className="input input-bordered input-success w-full max-w-xs" />  
+                        {errors.email && <p className='text-red-400'>{errors.email?.message}</p>}                        
                     </div>
                     <div className="form-control w-full max-w-xs">
                         <label className="label"> <span className="label-text">Password </span> </label>
-                        <input type="password" {...register("password")} className="input input-bordered input-success w-full max-w-xs" />        
+                        <input type="password" 
+                            {...register("password", { 
+                                required: "password is required",
+                              minLength: { value: 6, message: "password should be at least 6 characters or longer"}
+                            })} 
+                        className="input input-bordered input-success w-full max-w-xs" />  
+                        {errors.password && <small className='text-red-400'>{errors.password?.message}</small>}       
                         <label className="label"> <span className="label-text"> Forgot Password ? </span> </label>   
                                      
                     </div>
