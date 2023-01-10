@@ -32,7 +32,7 @@ const handleMakeAdmin= id=>{
             <h2 className="text-3xl">All Users</h2>
             <div className="overflow-x-auto">
                 <table className="table w-full">
-                    <thead>
+                    <thead className='text-white'>
                         <tr>
                             <th></th>
                             <th>Name</th>
@@ -48,7 +48,7 @@ const handleMakeAdmin= id=>{
                                 <th>{index + 1}</th>
                                 <td>{user.name}</td>
                                 <td>{user.email}</td>
-                                <td> {user?.role!=='Admin' && <button onClick={() => handleMakeAdmin(user._id)} className='btn btn-xs btn-primary'>Make Admin</button>} </td>
+                                <td> {user?.role!=='admin' && <button onClick={() => handleMakeAdmin(user._id)} className='btn btn-xs btn-primary'>Make Admin</button>} </td>
                                 <td> <button className='btn btn-xs btn-error'>Delete </button> </td>
                             </tr>
                         )}
