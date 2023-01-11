@@ -1,10 +1,24 @@
+import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import Spinner from '../../Shared/Spinner/Spinner';
 
 const AddDoctor = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const handleAddDoctor=()=>{
+    const {data:specialties , isLoading}= useQuery({
+        queryKey:['Specialty'],
+        queryFn: async()=>{
+            const res = await fetch(`http://localhost:5000/appointmentSpecialty`)
+            const data= await res.json();
+            return data;
+        }
+    })
+    const handleAddDoctor=(data)=>{
+        console.log(data)
+    }
 
+    if(isLoading){
+    return <Spinner></Spinner>
     }
     return (
         <div className='w-96 p-7'>
@@ -30,12 +44,27 @@ const AddDoctor = () => {
                 </div>
                 <div className="form-control w-full max-w-xs">
                     <label className="label"> <span className="label-text">Specialty</span> </label>
-                    <select className="select select-ghost w-full max-w-xs">
-                        <option disabled selected>Pick a Specialty</option>
-                        <option>Svelte</option>
-                        <option>Vue</option>
-                        <option>React</option>
+                    <select 
+                    {...register('specialty')}
+                    className="select select-bordered w-full max-w-xs">
+                        <option disabled selected>Please Select a Specialty</option>
+                        {
+                            specialties?.map(specialty => <option
+                            key={specialty._id}
+                            value={specialty.name}
+                            >{specialty.name}</option>)
+                        }
+                        
                     </select>
+                </div>
+                <div className="form-control w-full max-w-xs">
+                    <label className="label"> <span className="label-text">photo</span> </label>
+                    <input type="file"
+                        {...register("img", {
+                            required: 'photo is required'
+                        })}
+                        className="input input-bordered input-success w-full max-w-xs" />
+                    {errors.img && <span className='text-red-400'>{errors.img.message}</span>}
                 </div>
                 <br />
                 <input className='btn btn-accent w-full' value="Add Doctor" type="submit" />
