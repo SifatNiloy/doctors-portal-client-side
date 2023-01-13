@@ -5,6 +5,8 @@ import Spinner from '../../Shared/Spinner/Spinner';
 
 const AddDoctor = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
+    const imageHostKey = process.env.REACT_APP_imgbb_key;
+   
     const {data:specialties , isLoading}= useQuery({
         queryKey:['Specialty'],
         queryFn: async()=>{
@@ -13,8 +15,21 @@ const AddDoctor = () => {
             return data;
         }
     })
-    const handleAddDoctor=(data)=>{
-        console.log(data)
+    const handleAddDoctor=data=>{
+        const image = data.img[0];
+        const formData= new FormData();
+        formData.append('image', image)
+        const url =`https://api.imgbb.com/1/upload?expiration=600&key=${imageHostKey}`
+        fetch(url ,{
+            method: 'POST',
+            body: formData
+        })
+        .then(res=> res.json())
+        .then(ImageData=>{
+            if(ImageData.success){
+                
+            }
+        })
     }
 
     if(isLoading){
