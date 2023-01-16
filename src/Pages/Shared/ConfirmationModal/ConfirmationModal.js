@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ConfirmationModal = ({ title, message, closeModal, successAction, modalData }) => {
+const ConfirmationModal = ({ title, message, successButtonName, closeModal, successAction, modalData }) => {
     return (
         <div>
             
@@ -11,7 +11,9 @@ const ConfirmationModal = ({ title, message, closeModal, successAction, modalDat
                     <p className="py-4">{message}</p>
                     <div className="modal-action">
                         <label onClick={closeModal} htmlFor="confirmation-modal" className="btn">Cancel</label>
-                        <label onClick={() => successAction(modalData)} htmlFor="confirmation-modal" className="btn">Confirm</label>
+                        <label 
+                        onClick={() => successAction(modalData)} htmlFor="confirmation-modal" 
+                        className="btn btn-primary">{successButtonName}</label>
                     </div>
                 </div>
             </div>
