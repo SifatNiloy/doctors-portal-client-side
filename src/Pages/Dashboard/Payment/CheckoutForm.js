@@ -6,7 +6,7 @@ const CheckoutForm = ({booking}) => {
     const [clientSecret, setClientSecret] = useState("");
     const stripe= useStripe();
     const elements = useElements();
-    const {price}= booking;
+    const {price,patient, email}= booking;
 
     useEffect(() => {
         // Create PaymentIntent as soon as the page loads
@@ -44,7 +44,20 @@ const CheckoutForm = ({booking}) => {
         else{
             setCardError('')
         }
+        const { paymentIntent, error: confirmError } = await stripe.confirmCardPayment(
+            clientSecret,
+            {
+                payment_method: {
+                    card: card,
+                    billing_details: {
+                        name:patient ,
+                        email: email,
+                    },
+                },
+            },
+        );
     }
+    
     return (
         <>
             <form onSubmit={handleSubmit}>
