@@ -27,7 +27,7 @@ const BookingModal = ({ treatment, selectedDate, setTreatment, refetch }) => {
             phone,
             price
         }
-        fetch('http://localhost:5000/bookings',{
+        fetch('http://doctors-portal2.sifatniloy.com/bookings',{
             method: 'POST',
             headers: {
                 'content-type':'application/json' 

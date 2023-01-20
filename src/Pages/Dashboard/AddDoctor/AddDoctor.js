@@ -13,7 +13,7 @@ const AddDoctor = () => {
     const { data: specialties, isLoading } = useQuery({
         queryKey: ['Specialty'],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/appointmentSpecialty`)
+            const res = await fetch(`http://doctors-portal2.sifatniloy.com/appointmentSpecialty`)
             const data = await res.json();
             return data;
         }
@@ -37,7 +37,7 @@ const AddDoctor = () => {
                         image: ImageData.data.url
                     }
                     //save doctor information to the database
-                    fetch('http://localhost:5000/doctors', {
+                    fetch('http://doctors-portal2.sifatniloy.com/doctors', {
                         method: 'POST',
                         headers: {
                             'content-type': 'application/json',

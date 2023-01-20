@@ -13,7 +13,7 @@ const AvailableAppointments = ({ selectedDate }) => {
     const { data: appointmentOptions, isLoading, refetch}=useQuery({
         
         queryKey: ['appointmentOptions',date],
-        queryFn: () => fetch(`http://localhost:5000/appointmentOptions?date=${date}`)
+        queryFn: () => fetch(`http://doctors-portal2.sifatniloy.com/appointmentOptions?date=${date}`)
             .then(res => res.json())
     })
     if(isLoading){
@@ -21,7 +21,7 @@ const AvailableAppointments = ({ selectedDate }) => {
     }
 
     // useEffect(()=>{
-    //     fetch('http://localhost:5000/appointmentOptions')
+    //     fetch('http://doctors-portal2.sifatniloy.com/appointmentOptions')
     //     .then(res=> res.json())
     //     .then(data=> setAppointmentOptions(data))
     // },[])

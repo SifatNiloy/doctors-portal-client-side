@@ -1,31 +1,39 @@
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import React, { useEffect, useState } from 'react';
+import Spinner from '../../Shared/Spinner/Spinner';
 
 const CheckoutForm = ({booking}) => {
     const [cardError, setCardError]= useState('')
-    const [clientSecret, setClientSecret] = useState("");
+    const [isLoading, setIsLoading] = useState(true)
+    const [clientSecret, setClientSecret ] = useState('');
     const stripe= useStripe();
     const elements = useElements();
-    const {price,patient, email}= booking;
+    const {price, patient, email }= booking;
 
     useEffect(() => {
+        
+        
         // Create PaymentIntent as soon as the page loads
-        fetch("http://localhost:5000/create-payment-intent", {
+        if(isLoading){
+            return <Spinner></Spinner>
+        }
+        fetch("http://doctors-portal2.sifatniloy.com/create-payment-intent", {
             method: "POST",
             headers: { 
                 "Content-Type": "application/json" ,
-                authrization: `bearer ${localStorage.getItem('accessToken')}`
+                authorization: `bearer ${localStorage.getItem('accessToken')}`
             },
             body: JSON.stringify({ price }),
         })
             .then((res) => res.json())
             .then((data) => setClientSecret(data.clientSecret));
+            setIsLoading(false)
     }, [price]);
 
 
     const handleSubmit= async(event)=>{
         event.preventDefault()
-        if(!stripe || !elements){
+        if (!stripe || !elements){
             return;
         }
         const card = elements.getElement(CardElement);
@@ -56,6 +64,11 @@ const CheckoutForm = ({booking}) => {
                 },
             },
         );
+        if(confirmError){
+            setCardError(confirmError.message);
+            return;
+        }
+        console.log('paymentIntent',paymentIntent)
     }
     
     return (
@@ -79,7 +92,7 @@ const CheckoutForm = ({booking}) => {
                 />
                 <button className='mt-4 btn btn-sm btn-secondary' 
                 type="submit" 
-                disabled={!stripe || !clientSecret }>
+                    disabled={!stripe || !clientSecret}>                    
                     Pay
                 </button>
             </form>
